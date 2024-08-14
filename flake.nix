@@ -25,7 +25,7 @@
                 projectSrc = ./.;
                 name = "${author}/${name}";
                 main-ns = "main.core";
-                nativeImage.enable = true;
+                #nativeImage.enable = true;
               }
             ];
           };
