@@ -4,10 +4,17 @@
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     flake-utils.url = "github:numtide/flake-utils";
+    nix-filter.url = "github:numtide/nix-filter";
     clj-nix.url = "github:jlesquembre/clj-nix";
   };
 
-  outputs = { self, nixpkgs, flake-utils, clj-nix }:
+  outputs = {
+    self,
+    nixpkgs,
+    flake-utils,
+    nix-filter,
+    clj-nix
+  }:
 
     flake-utils.lib.eachDefaultSystem (system:
     let
@@ -30,9 +37,21 @@
             ];
           };
 
-          docker-image = pkgs.dockerTools.buildLayeredImage {
+          docker-image = pkgs.dockerTools.buildImage {
             name = "ghcr.io/rschardt/govdata-dashboard";
             tag = "latest";
+            copyToRoot = (pkgs.buildEnv {
+              name = "govdata-dashboard-container-layer-0";
+              paths = [
+                (nix-filter {
+                  root = ./.;
+                  include = [
+                    ./departments.json
+                  ];
+                })
+              ];
+              pathsToLink = [ "/" ];
+            });
             config = {
               Cmd = "${default}/bin/${name}";
             };
