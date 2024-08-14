@@ -4,6 +4,13 @@
   )
   (:gen-class))
 
+(defn replace_whitespaces
+  [department_list]
+  (map
+   (fn [department]
+     (clojure.string/replace department #"\s+" "%20"))
+   department_list))
+
 (defn get_department_entry
   [outer_entry]
   (if (contains? outer_entry "subordinates")
@@ -25,5 +32,8 @@
 (defn -main
   [& args]
   (println (str "GovData-Dashboard has started!"))
-  (println parse_departments)
+  (println)
+  (let [department_list (parse_departments)]
+    (println (replace_whitespaces department_list)))
+  (println)
   (println (str "GovData-Dashboard has shutdown!")))
