@@ -6,7 +6,9 @@ This repository is related to this Coding Challenge: https://github.com/digitals
 
 ## Run
 Not using nix?
+
 Install clojure for running the source, the REPL and the unit tests.
+
 The app also has a docker image: ghcr.io/rschardt/govdata-dashboard:latest
 
 ### run from source
