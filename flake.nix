@@ -31,7 +31,7 @@
           };
 
           docker-image = pkgs.dockerTools.buildLayeredImage {
-            name = "GovData-Dashboard";
+            name = "ghcr.io/rschardt/govdata-dashboard";
             tag = "latest";
             config = {
               Cmd = "${default}/bin/${name}";

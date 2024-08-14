@@ -67,7 +67,7 @@ docker image load -i result
 
 ### run docker image from local build
 ```
-docker run govdata-dashboard:latest
+docker run ghcr.io/rschardt/govdata-dashboard:latest
 ```
 
 ### run docker image from ghrc.io
