@@ -91,6 +91,7 @@
     (let [whitespace_replaced_department_list (replace_whitespaces department_list)]
       (let [conform_department_list (get_api_conform_department_names whitespace_replaced_department_list)]
         (let [organization_package_counts (get_package_counts_of_organizations conform_department_list)]
-          (println (organization_package_counts))))))
+          (println (zipmap department_list organization_package_counts))))))
+          ;;(println (zipmap conform_department_list organization_package_counts))))))
   (println)
   (println (str "GovData-Dashboard has shutdown!")))
