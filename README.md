@@ -2,7 +2,7 @@
 
 This repository is related to this Coding Challenge: https://github.com/digitalservicebund/backend-challenge
 
-# TODO Insert PNG of the Application Dashboard
+![alt text GovData-Dashboard.png](https://github.com/rschardt/GovData-Dashboard/blob/main/GovData-Dashboard.png)
 
 ## Run
 Not using nix?
