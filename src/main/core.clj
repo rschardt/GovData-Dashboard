@@ -4,6 +4,9 @@
   )
   (:gen-class))
 
+(import java.util.Locale)
+(Locale/setDefault Locale/GERMANY)
+
 (defn transform_org_show_response
   [json_response url]
   (if (= json_response 0 )
@@ -85,6 +88,7 @@
 
 (defn -main
   [& args]
+  ;;(Locale/setDefault Locale/GERMANY)
   (println (str "GovData-Dashboard has started!"))
   (println)
   (let [department_list (parse_departments)]

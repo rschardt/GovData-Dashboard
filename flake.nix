@@ -33,8 +33,11 @@
                 name = "${author}/${name}";
                 main-ns = "main.core";
                 jdk = pkgs.jdk22_headless;
+                java-opts = [ "-Duser.country=DE" "-Duser.language=de"];
+                builder-java-opts = [ "-Duser.country=DE" "-Duser.language=de"];
                 customJdk = {
                   enable = true;
+                  locales = "de";
                 };
               }
             ];
@@ -57,6 +60,11 @@
             });
             config = {
               Cmd = "${default}/bin/${name}";
+              ENV = [
+                "LC_ALL=de_DE.UTF-8"
+                "LANG=de_DE.UTF-8"
+                "LANGUAGE=de_DE:de"
+              ];
             };
           };
         };
