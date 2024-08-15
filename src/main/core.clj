@@ -2,6 +2,7 @@
   (:require
     [cheshire.core :refer :all]
     [org.httpkit.server :as hk-server]
+    [hiccup2.core :as h]
   )
   (:gen-class))
 
@@ -84,13 +85,20 @@
      (clojure.java.io/reader "departments.json"))
     "departments")))
 
+(defn generate_html
+  [merged_map]
+  (map
+   (fn [item]
+     (str (h/html [:h6 (format "%1$s: %2$s" (key item) (val item))])))
+   merged_map))
+
 (defn generate_http_body
   []
   (let [department_list (parse_departments)]
     (let [whitespace_replaced_department_list (replace_whitespaces department_list)]
       (let [conform_department_list (get_api_conform_department_names whitespace_replaced_department_list)]
         (let [organization_package_counts (get_package_counts_of_organizations conform_department_list)]
-          (str (zipmap department_list organization_package_counts)))))))
+          (generate_html (zipmap department_list organization_package_counts)))))))
           ;;(str (zipmap conform_department_list organization_package_counts)))))))
 
 (def HTTP_BODY (atom nil))

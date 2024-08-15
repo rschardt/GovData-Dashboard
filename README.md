@@ -86,5 +86,6 @@ nix run github:jlesquembre/clj-nix#deps-lock
 ## External Libraries/Technologies
 - For JSON-Parsing: https://github.com/dakrone/cheshire
 - Simple http-server: https://github.com/http-kit/http-kit
+- Hiccup for generating HTML: https://github.com/weavejester/hiccup
 - A nix flake as devShell, run, test, build, packaging and deployment tool
 - Nix support for clojure, clj-nix: https://github.com/jlesquembre/clj-nix
