@@ -36,11 +36,7 @@ nix develop -c clj
 
 ## Tests
 
-### run unit tests
-```
-```
-
-### run e2e tests
+### run Unit Tests
 ```
 ```
 
