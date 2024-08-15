@@ -32,7 +32,10 @@
                 projectSrc = ./.;
                 name = "${author}/${name}";
                 main-ns = "main.core";
-                #nativeImage.enable = true;
+                jdk = pkgs.jdk22_headless;
+                customJdk = {
+                  enable = true;
+                };
               }
             ];
           };
