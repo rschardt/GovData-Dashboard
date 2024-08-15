@@ -1,6 +1,7 @@
 (ns main.core
   (:require
     [cheshire.core :refer :all]
+    [org.httpkit.server :as hk-server]
   )
   (:gen-class))
 
@@ -83,15 +84,26 @@
      (clojure.java.io/reader "departments.json"))
     "departments")))
 
-(defn -main
-  [& args]
-  (println (str "GovData-Dashboard has started!"))
-  (println)
+(defn generate_http_body
+  []
   (let [department_list (parse_departments)]
     (let [whitespace_replaced_department_list (replace_whitespaces department_list)]
       (let [conform_department_list (get_api_conform_department_names whitespace_replaced_department_list)]
         (let [organization_package_counts (get_package_counts_of_organizations conform_department_list)]
-          (println (zipmap department_list organization_package_counts))))))
-          ;;(println (zipmap conform_department_list organization_package_counts))))))
-  (println)
-  (println (str "GovData-Dashboard has shutdown!")))
+          (str (zipmap department_list organization_package_counts)))))))
+          ;;(str (zipmap conform_department_list organization_package_counts)))))))
+
+(def HTTP_BODY (atom nil))
+
+(defn app [req]
+  {:status  200
+   :headers {"Content-Type" "text/html"}
+   :body
+   (deref HTTP_BODY)
+   })
+
+(defn -main
+  [& args]
+  (println (str "GovData-Dashboard has started on port: 8080"))
+  (reset! HTTP_BODY (generate_http_body))
+  (hk-server/run-server app {:port 8080}))
