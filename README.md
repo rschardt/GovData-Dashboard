@@ -38,6 +38,7 @@ nix develop -c clj
 
 ### run Unit Tests
 ```
+nix develop -c clj -M -m test.main.core
 ```
 
 ## Build

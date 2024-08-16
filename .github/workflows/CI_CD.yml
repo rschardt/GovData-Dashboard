@@ -19,6 +19,9 @@ jobs:
       - name: Install Nix
         uses: cachix/install-nix-action@v27
 
+      - name: Run Unit Tests
+        run: nix develop -c clj -M -m test.main.core
+
       - name: Build Docker Container
         run: nix build .\#docker-image
 
